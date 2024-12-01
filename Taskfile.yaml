@@ -4,17 +4,20 @@ vars:
   APP_NAME: myapp
 
 tasks:
-  build:
-    desc: Build the Go application
+  migrate_up:
+    desc: Migrations UP completed success
     cmds:
-      - go build -o {{.APP_NAME}} ./cmd/{{.APP_NAME}}
-    deps:
-      - task: deps
+      - migrate -path ./services/migrations -database "postgres://northwindman:newpassword@localhost:5432/med_note?sslmode=disable" up
+
+  migrate_down:
+    desc: Migrations DOWN completed success
+    cmds:
+      -
 
   run:
     desc: Run the application
     cmds:
-      - go run ./patient-service/cmd/main.go
+      - go run ./services/patient-service/cmd/main.go
 
   load_env:
     desc: Load environment variables from .env file in local terminal session

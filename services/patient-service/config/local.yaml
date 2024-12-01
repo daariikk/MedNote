@@ -1,5 +1,5 @@
 env: "local" #prod , dev
-database_connection_url: "https://%s:%s@localhost:%s/med_note?sslmode=disable"
+database_connection_url: "postgres://%s:%s@localhost:%s/med_note?sslmode=disable"
 http_server:
   address: "localhost:8081"
   timeout: 4s

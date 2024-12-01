@@ -1,5 +1,5 @@
 # Используем официальный образ PostgreSQL
-FROM postgres@latest
+FROM postgres:latest
 
 # Устанавливаем переменные окружения для PostgreSQL
 # Устанавливаем переменные окружения для PostgreSQL
