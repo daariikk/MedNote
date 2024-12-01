@@ -3,35 +3,35 @@ package postgres
 import (
 	"context"
 	"github.com/daariikk/MedNote/services/patient-service/internal/domain"
-	"github.com/daariikk/MedNote/services/patient-service/internal/repository"
 	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pkg/errors"
+	"log/slog"
 )
 
 type Storage struct {
-	connectionPool *pgxpool.Pool
+	connection *pgx.Conn
 }
 
-func New(ctx context.Context, url string) (*Storage, error) {
-	pool, err := pgxpool.New(ctx, url)
+func New(ctx context.Context, logger *slog.Logger, url string) (*Storage, error) {
+	conn, err := pgx.Connect(ctx, url)
 	if err != nil {
+		logger.Error("Failed to connect to postgres", "error", err)
 		return nil, errors.Wrapf(err, "failed to connect to postgres")
 	}
 
-	return &Storage{pool}, nil
+	return &Storage{conn}, nil
 }
 
 func (s *Storage) Close() error {
-	if s.connectionPool != nil {
-		s.connectionPool.Close()
+	if s.connection != nil {
+		return s.connection.Close(context.Background())
 	}
 	return nil
 }
 
 func (s *Storage) GetPatient(userId int64) (domain.Patient, error) {
 	var patient domain.Patient
-	err := s.connectionPool.QueryRow(context.Background(), `
+	err := s.connection.QueryRow(context.Background(), `
         SELECT id, first_name, second_name, email, height, weight, gender, password, registration_data
         FROM patients
         WHERE id = $1
@@ -48,7 +48,7 @@ func (s *Storage) GetPatient(userId int64) (domain.Patient, error) {
 	)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
-			return domain.Patient{}, repository.ErrorNotFound
+			return domain.Patient{}, errors.Wrapf(err, "patient with id %d not found", userId)
 		}
 		return domain.Patient{}, errors.Wrapf(err, "failed to get patient with id %d", userId)
 	}
@@ -56,11 +56,11 @@ func (s *Storage) GetPatient(userId int64) (domain.Patient, error) {
 }
 
 func (s *Storage) UpdatePatient(patient domain.Patient) (domain.Patient, error) {
-	_, err := s.connectionPool.Exec(context.Background(), `
+	_, err := s.connection.Exec(context.Background(), `
         UPDATE patients
-        SET first_name = $1, second_name = $2, height = $3, weight = $4, gender = $5
-        WHERE id = $6
-    `, patient.FirstName, patient.SecondName, patient.Height, patient.Weight, patient.Gender, patient.Id)
+        SET first_name = $1, second_name = $2, email = $3, height = $4, weight = $5, gender = $6, password = $7, registration_data = $8
+        WHERE id = $9
+    `, patient.FirstName, patient.SecondName, patient.Email, patient.Height, patient.Weight, patient.Gender, patient.Password, patient.RegistrationData, patient.Id)
 	if err != nil {
 		return domain.Patient{}, errors.Wrapf(err, "failed to update patient with id %d", patient.Id)
 	}

@@ -34,9 +34,10 @@ func New(config *config.Config) *App {
 	logger := setupLogger(config.Env)
 
 	dbUrlConnection := CreateDBConnectionUrl(*config)
+	logger.Debug("DB url connection", slog.String("url", dbUrlConnection))
 	ctx := context.Background()
 
-	storage, err := postgres.New(ctx, dbUrlConnection)
+	storage, err := postgres.New(ctx, logger, dbUrlConnection)
 	if err != nil {
 		log.Fatalf("db create error: %s", err)
 	}
@@ -58,6 +59,8 @@ func New(config *config.Config) *App {
 }
 
 func (a *App) Run() {
+	defer a.db.Close()
+
 	errChan := make(chan error, 1)
 	go func() {
 		a.logger.Info("Starting server", slog.String("addr", a.config.Address))
