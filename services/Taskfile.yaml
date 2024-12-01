@@ -1,0 +1,22 @@
+version: '3'
+
+vars:
+  APP_NAME: myapp
+
+tasks:
+  build:
+    desc: Build the Go application
+    cmds:
+      - go build -o {{.APP_NAME}} ./cmd/{{.APP_NAME}}
+    deps:
+      - task: deps
+
+  run:
+    desc: Run the application
+    cmds:
+      - go run ./patient-service/cmd/main.go
+
+  load_env:
+    desc: Load environment variables from .env file in local terminal session
+    cmds:
+      - bash -c 'source load_env.sh'
