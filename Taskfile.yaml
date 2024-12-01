@@ -7,17 +7,12 @@ tasks:
   migrate_up:
     desc: Migrations UP completed success
     cmds:
-      - migrate -path ./services/migrations -database "postgres://northwindman:newpassword@localhost:5432/med_note?sslmode=disable" up
+      - migrate -path ./services/migrations -database "postgres://postgres:test@localhost:5432/med_note?sslmode=disable" up
 
   migrate_down:
     desc: Migrations DOWN completed success
     cmds:
-      -
-
-  run:
-    desc: Run the application
-    cmds:
-      - go run ./services/patient-service/cmd/main.go
+      - migrate -path ./services/migrations -database "postgres://postgres:test@localhost:5432/med_note?sslmode=disable" down
 
   load_env:
     desc: Load environment variables from .env file in local terminal session
