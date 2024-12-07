@@ -11,6 +11,6 @@ type Patient struct {
 	Height           float64   `json:"height"`
 	Weight           float64   `json:"weight"`
 	Gender           string    `json:"gender"`
-	Password         []byte    `json:"password"`
+	Password         string    `json:"password"`
 	RegistrationData time.Time `json:"registration_data"`
 }

@@ -17,7 +17,7 @@ type UpdatePatienter interface {
 func UpdatePatient(logger *slog.Logger, patienter UpdatePatienter) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const op = "patient-service/internal/api/rest/handlers/get_patient/Patient"
-		logger.With(op)
+		//logger.With(op)
 
 		userIdStr := chi.URLParam(r, "userId")
 		userId, err := strconv.ParseInt(userIdStr, 10, 64)
@@ -35,10 +35,13 @@ func UpdatePatient(logger *slog.Logger, patienter UpdatePatienter) http.HandlerF
 			return
 		}
 
+		logger.Debug("Handling UPDATE patient request for user", slog.Any("patient", patient))
+
 		patient.Id = userId
 
 		updatedPatient, err := patienter.UpdatePatient(patient)
 		if err != nil {
+			logger.Info("getting user error", slog.Any("error", err))
 			response.SendFailureResponse(w, "Failed to update patient", http.StatusInternalServerError)
 			return
 		}

@@ -1,8 +1,5 @@
 version: '3'
 
-vars:
-  APP_NAME: myapp
-
 tasks:
   migrate_up:
     desc: Migrations UP completed success
@@ -14,7 +11,20 @@ tasks:
     cmds:
       - migrate -path ./services/migrations -database "postgres://postgres:test@localhost:5432/med_note?sslmode=disable" down
 
+  docker_up:
+    cmds:
+    - docker compose up -d
+
+  docker_down:
+    cmds:
+      - docker compose down
+
   load_env:
     desc: Load environment variables from .env file in local terminal session
     cmds:
       - bash -c 'source load_env.sh'
+
+  run:
+    desc: Run the patient-service application
+    cmds:
+      - go run ./services/patient-service/cmd/main.go

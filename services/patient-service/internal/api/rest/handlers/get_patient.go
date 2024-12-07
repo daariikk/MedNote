@@ -18,7 +18,7 @@ type GetPatienter interface {
 func Patient(logger *slog.Logger, patienter GetPatienter) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const op = "patient-service/internal/api/rest/handlers/get_patient/Patient"
-		logger.With(op)
+		//logger.With(op)
 
 		userIdStr := chi.URLParam(r, "userId")
 		userId, err := strconv.ParseInt(userIdStr, 10, 64)
@@ -32,8 +32,10 @@ func Patient(logger *slog.Logger, patienter GetPatienter) http.HandlerFunc {
 		patient, err := patienter.GetPatient(userId)
 		if err != nil {
 			if errors.Is(err, repository.ErrorNotFound) {
+				//logger.Info("Patient not found", sl.Err(err))
 				response.SendFailureResponse(w, "Patient not found", http.StatusNotFound)
 			} else {
+				//logger.Info("Patient not found", sl.Err(err))
 				response.SendFailureResponse(w, "Failed to get patient", http.StatusInternalServerError)
 			}
 			return
