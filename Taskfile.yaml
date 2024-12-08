@@ -27,4 +27,4 @@ tasks:
   run:
     desc: Run the patient-service application
     cmds:
-      - go run ./services/patient-service/cmd/main.go
+      - go run ./services/record-service/cmd/main.go
