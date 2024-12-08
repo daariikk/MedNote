@@ -7,7 +7,6 @@ import (
 
 func main() {
 	cfg := config.MustLoad()
-	// TODO: сделать миграции
 	application := app.New(cfg)
 	application.Run()
 }
