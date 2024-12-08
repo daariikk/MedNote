@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS steps (
-    id BIGINT PRIMARY KEY,                                    
+    id BIGSERIAL  PRIMARY KEY,
     indicator INT NOT NULL,                                              
     control VARCHAR(10) CHECK (control IN ('NORMAL', 'BAD', 'CRITICAL')) NOT NULL,  
     date_of_addition DATE NOT NULL,                            

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS complaints (
-    id BIGINT PRIMARY KEY,                                    
+    id BIGSERIAL  PRIMARY KEY,
     complaint VARCHAR(512) NOT NULL,                                             
     date_of_addition DATE NOT NULL,                            
     patient_id BIGINT NOT NULL,                                

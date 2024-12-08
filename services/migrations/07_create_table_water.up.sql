@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS water(
-    id BIGINT PRIMARY KEY,                                    
+    id BIGSERIAL  PRIMARY KEY,
     volume_glass INT NOT NULL, 
     count_glass INT NOT NULL,
     indicator INT NOT NULL,                                             
