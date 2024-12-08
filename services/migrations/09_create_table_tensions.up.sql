@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS tensions (
-    id BIGSERIAL  PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     upper_indicator VARCHAR(4) NOT NULL,                       
     lower_indicator VARCHAR(4) NOT NULL,                       
     control VARCHAR(10) CHECK (control IN ('NORMAL', 'BAD', 'CRITICAL')) NOT NULL,  

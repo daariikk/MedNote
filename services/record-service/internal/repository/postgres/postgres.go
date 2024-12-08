@@ -2,14 +2,33 @@ package postgres
 
 import (
 	"context"
-	"github.com/daariikk/MedNote/services/patient-service/internal/domain"
+	"fmt"
+	"github.com/daariikk/MedNote/services/record-service/internal/repository"
 	"github.com/jackc/pgx/v5"
 	"github.com/pkg/errors"
 	"log/slog"
+	"time"
 )
 
 type Storage struct {
 	connection *pgx.Conn
+	logger     *slog.Logger
+}
+
+type Record struct {
+	Type           string    `json:"type"`
+	ID             int64     `json:"id"`
+	UpperIndicator int64     `json:"upper_indicator,omitempty"`
+	LowerIndicator int64     `json:"lower_indicator,omitempty"`
+	Indicator      int64     `json:"indicator,omitempty"`
+	Hours          int64     `json:"hours,omitempty"`
+	Minutes        int64     `json:"minutes,omitempty"`
+	VolumeGlass    int64     `json:"volume_glass,omitempty"`
+	CountGlass     int64     `json:"count_glass,omitempty"`
+	Control        string    `json:"control,omitempty"`
+	DateOfAddition time.Time `json:"date_of_addition"`
+	IdPatient      int64     `json:"patient_id"`
+	Complaint      string    `json:"complaint,omitempty"`
 }
 
 func New(ctx context.Context, logger *slog.Logger, url string) (*Storage, error) {
@@ -19,7 +38,7 @@ func New(ctx context.Context, logger *slog.Logger, url string) (*Storage, error)
 		return nil, errors.Wrapf(err, "failed to connect to postgres")
 	}
 
-	return &Storage{conn}, nil
+	return &Storage{conn, logger}, nil
 }
 
 func (s *Storage) Close() error {
@@ -29,40 +48,15 @@ func (s *Storage) Close() error {
 	return nil
 }
 
-func (s *Storage) GetPatient(userId int64) (domain.Patient, error) {
-	var patient domain.Patient
-	err := s.connection.QueryRow(context.Background(), `
-        SELECT id, first_name, second_name, email, height, weight, gender, password, registration_data
-        FROM patients
-        WHERE id = $1
-    `, userId).Scan(
-		&patient.Id,
-		&patient.FirstName,
-		&patient.SecondName,
-		&patient.Email,
-		&patient.Height,
-		&patient.Weight,
-		&patient.Gender,
-		&patient.Password,
-		&patient.RegistrationData,
-	)
+func (s *Storage) DeleteRecords(patientId int64, tableName string, recordId int64) error {
+	query := fmt.Sprintf("DELETE FROM %s WHERE id = $1 AND patient_id = $2", tableName)
+	tag, err := s.connection.Exec(context.Background(), query, recordId)
 	if err != nil {
-		if errors.Is(err, pgx.ErrNoRows) {
-			return domain.Patient{}, errors.Wrapf(err, "patient with id %d not found", userId)
-		}
-		return domain.Patient{}, errors.Wrapf(err, "failed to get patient with id %d", userId)
+		return errors.Wrap(err, "failed to execute delete query")
 	}
-	return patient, nil
-}
+	if tag.RowsAffected() == 0 {
 
-func (s *Storage) UpdatePatient(patient domain.Patient) (domain.Patient, error) {
-	_, err := s.connection.Exec(context.Background(), `
-        UPDATE patients
-        SET first_name = $1, second_name = $2, email = $3, height = $4, weight = $5, gender = $6, password = $7, registration_data = $8
-        WHERE id = $9
-    `, patient.FirstName, patient.SecondName, patient.Email, patient.Height, patient.Weight, patient.Gender, patient.Password, patient.RegistrationData, patient.Id)
-	if err != nil {
-		return domain.Patient{}, errors.Wrapf(err, "failed to update patient with id %d", patient.Id)
+		return repository.ErrorDeleteFailed
 	}
-	return patient, nil
+	return nil
 }

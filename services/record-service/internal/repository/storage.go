@@ -3,6 +3,9 @@ package repository
 import "errors"
 
 var (
-	ErrorAlreadyExists = errors.New("patient with this data already exists")
-	ErrorNotFound      = errors.New("patient is not found")
+	ErrorNotFound         = errors.New("record not found")
+	ErrorDeleteFailed     = errors.New("no record entries to delete")
+	ErrorInsertFailed     = errors.New("failed to insert record")
+	ErrorInvalidInput     = errors.New("invalid input data")
+	ErrorTypeNotSupported = errors.New("type not supported")
 )

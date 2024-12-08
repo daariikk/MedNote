@@ -21,7 +21,7 @@ type HTTPServer struct {
 }
 
 func MustLoad() *Config {
-	configPath := os.Getenv("PATIENT_SERVICE_CONFIG_PATH")
+	configPath := os.Getenv("RECORD_SERVICE_CONFIG_PATH")
 	if configPath == "" {
 		log.Fatal("CONFIG_PATH is not set")
 	}

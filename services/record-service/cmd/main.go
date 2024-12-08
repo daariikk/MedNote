@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/daariikk/MedNote/services/patient-service/internal/app"
-	"github.com/daariikk/MedNote/services/patient-service/internal/config"
+	"github.com/daariikk/MedNote/services/record-service/internal/app"
+	"github.com/daariikk/MedNote/services/record-service/internal/config"
 )
 
 func main() {

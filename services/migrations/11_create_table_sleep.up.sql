@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS sleep(
-    id BIGSERIAL  PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     hours INT NOT NULL, 
     minutes INT NOT NULL,                                             
     control VARCHAR(10) CHECK (control IN ('NORMAL', 'BAD', 'CRITICAL')) NOT NULL,  

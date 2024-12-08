@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS reminders (
-    reminder_id BIGSERIAL  PRIMARY KEY,
+    reminder_id BIGSERIAL PRIMARY KEY,
     title VARCHAR(256) NOT NULL,                             
     text TEXT NOT NULL,                                      
     date DATE NOT NULL,                                     
