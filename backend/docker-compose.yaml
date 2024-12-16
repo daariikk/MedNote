@@ -1,0 +1,48 @@
+services:
+  # Сервис PostgreSQL
+#  postgres:
+#    image: postgres:latest
+#    container_name: mednote_postgres
+#    environment:
+#      POSTGRES_DB: med_note
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: test
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - mednote_network
+#    restart: always
+
+  # Сервис RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: mednote_rabbitmq
+    ports:
+      - "5672:5672"  # Порт для приложений
+      - "15672:15672" # Порт для веб-интерфейса RabbitMQ
+    networks:
+      - mednote_network
+    restart: always
+
+  # Пример сервиса (если нужно)
+  # patient-service:
+  #   build:
+  #     context: ./services/patient-service
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     SERVICE_ENV: production
+  #   ports:
+  #     - "8081:8080"
+  #   networks:
+  #     - mednote_network
+
+volumes:
+  postgres_data:
+
+networks:
+  mednote_network:
+    name: mednote_network

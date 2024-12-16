@@ -1,0 +1,50 @@
+version: '3'
+
+tasks:
+  migrate_up:
+    desc: Migrations UP completed success
+    cmds:
+      - migrate -path ./services/migrations -database "postgres://postgres:pingvin@localhost:5432/mednote?sslmode=disable" up
+
+  migrate_down:
+    desc: Migrations DOWN completed success
+    cmds:
+      - migrate -path ./services/migrations -database "postgres://postgres:pingvin@localhost:5432/mednote?sslmode=disable" down
+
+  docker_up:
+    cmds:
+    - docker compose up -d
+
+  docker_down:
+    cmds:
+      - docker compose down
+
+  load_env:
+    desc: Load environment variables from .env file in local terminal session
+    cmds:
+      - bash -c 'source load_env.sh'
+
+  run:
+    desc: Run the patient-service application
+    cmds:
+      - go run ./services/patient-service/cmd/main.go
+
+  run_reminder:
+    desc: Run the reminder-service application
+    cmds:
+      - go run ./services/reminder-service/cmd/main.go
+
+  run_record:
+    desc: Run the record-service application
+    cmds:
+      - go run ./services/record-service/cmd/main.go
+
+  run_api_gateway:
+    desc: Run the api_gateway application
+    cmds:
+      - go run ./services/api-gateway/cmd/main.go
+
+  run_notification:
+    desc: Run the notification-service application
+    cmds:
+      - go run ./services/notification-service/cmd/main.go
