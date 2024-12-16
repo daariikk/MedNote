@@ -1,0 +1,26 @@
+# Игнорировать файлы конфигурации
+*.env
+*.envrc
+*.local.yaml
+*.prod.yaml
+
+# Игнорировать папку .idea (если используется JetBrains IDE)
+.idea/
+
+# Игнорировать папку data (если она содержит временные данные)
+backend/data/
+
+# Игнорировать файлы логов (если они есть)
+*.log
+
+# Игнорировать файлы Go build artifacts
+*.exe
+*.test
+*.out
+
+# Игнорировать папку node_modules (если используется фронтенд)
+frontend/node_modules/
+
+# Игнорировать файлы Docker (если они есть)
+*.dockerignore
+*.dockerfile
