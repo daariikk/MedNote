@@ -1,8 +1,8 @@
 # Игнорировать файлы конфигурации
 *.env
 *.envrc
-*.local.yaml
-*.prod.yaml
+*local.yaml
+*prod.yaml
 
 # Игнорировать папку .idea (если используется JetBrains IDE)
 .idea/
