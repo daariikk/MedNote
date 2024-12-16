@@ -1,0 +1,80 @@
+/* Кнопка входа */
+.auth-buttons button {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Контейнер личного кабинета */
+.account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.account-container h2 {
+    font-size: 24px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* Форма личного кабинета */
+.account-form {
+    background-color: #555;
+    padding: 40px 60px;
+    border-radius: 10px;
+    width: 400px;
+    margin-bottom: 50px;
+}
+
+.account-form label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.account-form span {
+    color: #bbb;
+}
+
+.account-form button {
+    width: 100%;
+    background-color: #0080ff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.editable-input {
+    margin-left: 20px;
+    background-color: #666;
+    border: 1px solid #ddd;
+    color: #fff;
+    padding: 3px;
+    border-radius: 5px;
+    width: calc(100% - 10px);
+}
+
+.logout button {
+    background: none;
+    border: none;
+    color: red;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    transition: color 0.3s ease;
+}
+
+.logout button:hover {
+    color: darkred;
+}

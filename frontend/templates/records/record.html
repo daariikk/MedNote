@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник медицинских записей</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/record.css">
+    <link rel="stylesheet" href="../../css/reminder.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../img/all/logo.png">
+
+    <script src="../../js/record/record.js"></script>
+    <script src="../../js/record/get_record.js"></script>
+    <script src="../../js/record/control.js"></script>
+    <script src="../../js/href-index-account.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a id="logo-link" href="../homepage/index.html">
+                    <img src="../../img/all/logo.png" alt="MedNote Logo">
+                </a>
+                <p>Удобное ведение медицинских записей</p>
+            </div>
+            <div class="header-title">
+                <h2>Медицинские записи</h2>
+            </div>
+            <div class="auth-buttons">
+                <a href="../homepage/account.html"><button>Войти</button></a>
+            </div>
+        </div>
+    </header>
+
+        <main>
+            <div class="sidebar">
+                <a href="../records/record.html"><button class="record-button">
+                    <img src="../../img/all/record.png" alt="Record Icon">
+                </button></a>
+                <a href="../reminder/reminder.html"><button class="reminder-button">
+                    <img src="../../img/all/reminder.png" alt="Reminder Icon">
+                </button></a>
+            </div>
+    
+            <section class="reminder-form">
+                <div class="form-group">
+                    <label for="record-type">Выберите тип записи:</label>
+                    <select id="record-type" name="record-type" onchange="updateCardContent()">
+                        <option value="pulse">Пульс</option>
+                        <option value="sleep">Продолжительность сна</option>
+                        <option value="tensions">Артериальное давление</option>
+                        <option value="steps">Контроль активности</option>
+                        <option value="water">Питьевой контроль</option>
+                        <option value="complaints">Жалобы</option>
+                    </select>
+                </div>
+                
+                <div id="card-content" class="card-content">
+                    <!-- Здесь будет динамически меняться содержимое карточки -->
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn-submit" onclick="addRecord(event)">Добавить</button>
+                    <button type="button" class="btn-cancel">Отменить</button>
+                </div>
+                
+                
+            </section>
+    
+            <section class="reminders-container">
+                <div class="right-panel">
+                    <div class="date-info">
+                        <input type="date" id="custom-date">
+                    </div>
+
+                    <!-- <script>
+                        const today = new Date().toISOString().split('T')[0];
+                        const dateInput = document.getElementById('custom-date');
+                        dateInput.value = today;
+                    </script> -->
+
+                    <div class="legend">
+                        <h4>Показатели:</h4>
+                        <ul>
+                            <li class="green-indicator">Показатель в норме</li>
+                            <li class="yellow-indicator">Небольшое отклонение от нормы</li>
+                            <li class="red-indicator">Показатель не в норме</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+                    
+            </section>
+        </main>
+
+        <div class="main-content">
+
+            <div class="records">
+                <!-- Сюда должны добавлять мединские записи от пользователя-->
+            </div>
+
+            
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <p>MedNote</p>
+                <p>© 2024 MedNote – Все права защищены</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Помощь</a>
+                <a href="#">Техническая поддержка</a>
+            </div>
+            <div class="footer-contacts">
+                <p>Контакты:</p>
+                <p>mednote@example.com</p>
+                <p>+7 123 456 78 90</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

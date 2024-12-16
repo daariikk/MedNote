@@ -1,0 +1,80 @@
+main {
+    margin: 50px 0px;
+    min-height: 50vh;
+}
+
+/* Стили для формы входа */
+.login-form {
+    width: 300px;
+    padding: 20px;
+    background-color: #4a4a4a;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+}
+
+.login-form h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.login-form h4 {
+    font-size: 12px;
+    margin-bottom: 20px;
+    /* text-align: start; */
+}
+
+
+.login-form input[type="email"],
+.login-form input[type="password"],
+.login-form input[type="text"],
+.login-form input[type="new-password"],
+.login-form input[type="repeat-new-password"]
+{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.login-form input::placeholder {
+    color: #bbb;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4ea1ff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-form button:hover {
+    background-color: #3c82cc;
+}
+
+.login-form .forgot-password,
+.login-form .registration {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #bbb;
+    text-decoration: none;
+}
+
+.login-form .forgot-password:hover,
+.login-form .registration:hover {
+    color: #fff;
+}

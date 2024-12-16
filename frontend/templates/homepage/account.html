@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedNote</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/account.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../img/all/logo.png">
+    <script src="../../js/account.js"></script>
+    <script src="../../js/validate/validate.js"></script>
+    <script src="../../js/href-index-account.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a id="logo-link" href="../homepage/index.html">
+                    <img src="../../img/all/logo.png" alt="MedNote Logo">
+                </a>
+                <p>Удобное ведение медицинских записей</p>
+            </div>
+            <div class="header-title">
+                <h2>Личный кабинет</h2>
+            </div>
+            <div class="auth-buttons">
+                <a href="../homepage/account.html"><button>Войти</button></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="account-container">
+            <div class="account-form">
+                <label>Имя: <span class="editable" data-field="name"></span></label>
+                <label>Фамилия: <span class="editable" data-field="surname"></span></label>
+                <label>Email: <span data-field="email"></span></label>
+                <label>Пол: <span class="editable" data-field="gender"></span></label>
+                <label>Рост: <span class="editable" type="number" data-field="height"></span></label>
+                <label>Вес: <span class="editable"  type="number" data-field="weight"></span></label>
+                <button id="editButton" onclick="toggleEditMode()">Изменить</button>
+                <button id="saveButton" style="display: none;" onclick="saveChanges()">Сохранить</button>
+            </div>
+        </div>
+    </main>
+    
+
+    <div class="logout">
+        <button id="logoutButton">Выйти</button>
+    </div>
+    <script>
+        const logoutButton = document.getElementById('logoutButton');
+        logoutButton.addEventListener('click', function() {
+            localStorage.clear();
+            window.location.href = "../homepage/index.html";
+        });
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <p>MedNote</p>
+                <p>© 2024 MedNote – Все права защищены</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Помощь</a>
+                <a href="#">Техническая поддержка</a>
+            </div>
+            <div class="footer-contacts">
+                <p>Контакты:</p>
+                <p>mednote@example.com</p>
+                <p>+7 123 456 78 90</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,176 @@
+main {
+    display: flex;
+    margin: 20px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.reminder-button, .record-button {
+    border: none;
+    margin-bottom: 15px;
+    background-color: transparent; 
+    cursor: pointer;
+}
+
+
+.record-button img {
+    height: 50px;
+}
+
+.reminder-button img {
+    height: 40px;
+}
+
+.add-reminder-button {
+    margin-top: 30px;
+    width: 220px;
+    height: 50px;
+}
+
+
+.reminder-form {
+    flex-grow: 1;
+    background-color: #2E2E2E;
+    padding: 20px;
+    border-radius: 10px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title-input, .text-input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3E3E3E;
+    color: white;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+.form-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.date-picker, .time-picker {
+    display: flex;
+    align-items: center;
+}
+
+.clock {
+    height: 20px;
+}
+
+.calendar {
+    height: 30px;
+}
+
+.date-picker input, .time-picker input {
+    background-color: #3E3E3E;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.reminders-container {
+    max-width: 300px;
+    flex-grow: 1;
+    height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+
+
+.reminder {
+    background-color: #444;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100px; 
+}
+
+.reminder-content {
+    flex-grow: 1;
+    margin-bottom: 10px;
+}
+
+.reminders-container {
+    overflow-y: auto;
+    max-height: 400px;
+    padding-right: 10px;
+}
+
+.reminder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reminder-content h2 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    word-wrap: break-word; 
+    align-items: center; 
+}
+
+.reminder-content p {
+    word-wrap: break-word; 
+}
+
+
+
+
+.reminder-content img {
+    height: 16px;
+    margin-left: 5px;
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    color: darkred; 
+}
+
+/* Стилизация для прокрутки */
+.reminders-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.reminders-container::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 10px;
+}
+
+.reminders-container::-webkit-scrollbar-track {
+    background-color: #333;
+}
