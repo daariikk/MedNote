@@ -1,0 +1,18 @@
+env: "local" #prod , dev
+database_connection_url: "postgres://postgres:pingvin@localhost:5432/mednote?sslmode=disable"
+http_server:
+  address: "localhost:8082"
+  timeout: 4s
+  idle_timeout: 30s
+
+
+jwt:
+  secret_key: "c8d9e0f1g2h3i4j5k6l7m8n9o0p1q2r3s4t5u6v7w8x9y0z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R9S0T1U2V3W4X5Y6Z7a8b9c0d1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9a0b1c2d3e4f5g6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m8n9o0p1q2r3s4"
+  expire: 24h
+services:
+  patient_service: "http://localhost:8081"
+  record_service: "http://localhost:8083"
+  reminder_service: "http://localhost:8084"
+
+rabbitmq:
+  url: "amqp://guest:guest@localhost:5672/"
